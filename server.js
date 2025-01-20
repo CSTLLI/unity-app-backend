@@ -153,6 +153,30 @@ app.get('/api/players/stats', (req, res) => {
     });
 });
 
+app.get("/api/feedback/last/:userId", (req, res) => {
+	const { userId } = req.params;
+
+	if (!userId) {
+		return res.status(400).json({ error: "User ID is required" });
+	}
+
+	const query =
+		"SELECT id, comment, created_at FROM player_feedback WHERE player_id = ? ORDER BY created_at DESC LIMIT 1";
+
+	db.query(query, [userId], (err, results) => {
+		if (err) {
+			console.error("Database error:", err);
+			return res.status(500).json({ error: "Internal server error" });
+		}
+
+		if (results.length === 0) {
+			return res.json({ success: true, feedback: null });
+		}
+
+		res.json({ success: true, feedback: results[0] });
+	});
+});
+
 // Save player feedback
 app.post("/api/feedback", (req, res) => {
 	const { playerId, comment } = req.body;
@@ -176,6 +200,26 @@ app.post("/api/feedback", (req, res) => {
 			success: true,
 			feedbackId: result.insertId,
 		});
+	});
+});
+
+app.put("/api/feedback/:feedbackId", (req, res) => {
+	const { feedbackId } = req.params;
+	const { comment } = req.body;
+
+	if (!feedbackId || !comment) {
+		return res.status(400).json({ error: "Feedback ID and comment are required" });
+	}
+
+	const query = "UPDATE player_feedback SET comment = ? WHERE id = ?";
+
+	db.query(query, [comment, feedbackId], (err) => {
+		if (err) {
+			console.error("Database error:", err);
+			return res.status(500).json({ error: "Internal server error" });
+		}
+
+		res.json({ success: true });
 	});
 });
 
