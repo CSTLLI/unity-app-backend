@@ -7,122 +7,173 @@
 	},
 	"item": [
 		{
-			"name": "Login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"cstlli\",\r\n    \"password\": \"root\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"cstlli\",\r\n    \"password\": \"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3367/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3367",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3367/api/auth/login",
-					"host": [
-						"localhost"
-					],
-					"port": "3367",
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"cstlli11\",\r\n    \"password\": \"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3367/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "3367",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Post a feedback",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"playerId\": 6,\r\n    \"comment\": \"Great app!\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "Post a feedback",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerId\": 6,\r\n    \"comment\": \"Great app!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3367/api/feedback",
+							"host": [
+								"localhost"
+							],
+							"port": "3367",
+							"path": [
+								"api",
+								"feedback"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:3367/api/feedback",
-					"host": [
-						"localhost"
-					],
-					"port": "3367",
-					"path": [
-						"api",
-						"feedback"
-					]
+				{
+					"name": "Get the last feedback",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"playerId\": 6,\r\n    \"comment\": \"Great app!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3367/api/feedback/last/2",
+							"host": [
+								"localhost"
+							],
+							"port": "3367",
+							"path": [
+								"api",
+								"feedback",
+								"last",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Register",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"cstlli2\",\r\n    \"password\": \"root\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Stats",
+			"item": [
+				{
+					"name": "Get stats",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3367/api/players/stats",
+							"host": [
+								"localhost"
+							],
+							"port": "3367",
+							"path": [
+								"api",
+								"players",
+								"stats"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "localhost:3367/api/auth/register",
-					"host": [
-						"localhost"
-					],
-					"port": "3367",
-					"path": [
-						"api",
-						"auth",
-						"register"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get stats",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:3367/api/players/stats",
-					"host": [
-						"localhost"
-					],
-					"port": "3367",
-					"path": [
-						"api",
-						"players",
-						"stats"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }
