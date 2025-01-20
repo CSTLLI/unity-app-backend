@@ -130,24 +130,27 @@ app.post("/api/auth/login", async (req, res) => {
 });
 
 // Get player statistics
-app.get("/api/players/stats", (req, res) => {
+app.get('/api/players/stats', (req, res) => {
+    const query = `
+        SELECT 
+            u.username as playerName,
+            s.games_played as gamesPlayed,
+            s.wins as gamesWon,
+            s.losses as gamesLost,
+            s.score
+        FROM users u
+        JOIN player_stats s ON u.id = s.player_id
+        ORDER BY s.score DESC
+    `;
 
-	const query = `
-    SELECT * FROM player_stats;
-  `;
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
 
-	db.query(query, (err, results) => {
-		if (err) {
-			console.error("Database error:", err);
-			return res.status(500).json({ error: "Internal server error" });
-		}
-
-		if (results.length === 0) {
-			return res.status(404).json({ error: "Player not found" });
-		}
-
-		res.json(results);
-	});
+        res.json({ stats: results });
+    });
 });
 
 // Save player feedback
